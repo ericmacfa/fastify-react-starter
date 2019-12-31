@@ -1,0 +1,9 @@
+{
+    "sso": {
+        "auth0": {
+            "domain": "FASTIFY_WEBAPP_STARTER_CRA_AUTH0_DOMAIN",
+            "clientId": "FASTIFY_WEBAPP_STARTER_CRA_AUTH0_CLIENT_ID",
+            "clientSecret": "FASTIFY_WEBAPP_STARTER_CRA_AUTH0_CLIENT_SECRET"
+        }
+    }
+}

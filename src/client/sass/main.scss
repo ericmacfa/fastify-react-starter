@@ -1,0 +1,10 @@
+@import '../../../node_modules/bulma/bulma.sass';
+
+.react-app-main {
+    background: $white;
+    height: 100vh;
+}
+
+.clickable {
+    cursor: pointer;
+}

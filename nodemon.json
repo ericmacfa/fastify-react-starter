@@ -1,0 +1,4 @@
+{
+    "watch": ["src/setupProxy.js", "config/*", "src/server"],
+    "ignore": ["ignore/", "build/", "src/client"]
+}
