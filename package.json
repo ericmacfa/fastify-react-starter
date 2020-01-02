@@ -10,7 +10,7 @@
         "start": "node src/server/index.js",
         "start:local": "npm run build:local && npm run start:local-static",
         "start:local-hmr": "nodemon --ignore ./www --ignore ./src/client --exec npm run start",
-        "start:local-static": "DISABLE_HMR=true nodemon --ignore ./www --ignore ./src/client --exec npm run start",
+        "start:local-static": "DISABLE_HMR=true nodemon --ignore ./www-local --ignore ./src/client --exec npm run start",
         "build:local": "rm -rf www-local && npm run build:dev && mv www www-local",
         "build:dev": "webpack --config config/webpack/dev.config.js",
         "build:prod": "webpack --config config/webpack/production.config.js --optimize-minimize"
@@ -63,6 +63,7 @@
         "html-webpack-plugin": "^3.2.0",
         "http-proxy-middleware": "^0.20.0",
         "husky": "^3.1.0",
+        "mini-css-extract-plugin": "^0.9.0",
         "node-sass": "^4.13.0",
         "nodemon": "^2.0.2",
         "prettier": "^1.19.1",
