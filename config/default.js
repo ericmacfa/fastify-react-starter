@@ -15,8 +15,10 @@ module.exports = {
         }
     },
     sso: {
-        cookieMaxAge: ms('5 minutes'),
-        cookieKey: 'fake-cookie-key-this-should-be-replaced-with-a-secret!',
+        cookies: {
+            maxAge: ms('5 minutes'),
+            key: 'fake-cookie-key-this-should-be-replaced-with-a-secret!'
+        },
         auth0: {
             callbackUrl: 'https://localhost:3000/auth0/callback',
             domain: 'replaced by custom-environment-variables.json',

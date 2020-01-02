@@ -2,7 +2,13 @@ const config = require('config');
 const fastify = require('fastify');
 const fs = require('fs');
 const routes = require('./routes');
-const { configureServeWebapp } = require('./withConfiguration');
+const {
+    configureDecorators,
+    configureHooks,
+    configurePlugins,
+    configureServeWebapp,
+    configureSso
+} = require('./withConfiguration');
 
 const app = fastify({
     logger: config.get('server.logger'),
@@ -18,11 +24,34 @@ const app = fastify({
 app.setNotFoundHandler(function(request, reply) {
     reply.status(404).send('Not Found');
 });
-
+configurePlugins(app); // MUST be before SSO, since SSO requires sessions to be configured
+configureSso(app);
+configureDecorators(app);
+configureHooks(app);
 configureServeWebapp(app);
+
+const checkAuthenticated = async function(request, reply, next) {
+    const tokens = request.getSessionTokens();
+    const tokenError = await this.isAuthenticated(tokens);
+
+    if (tokenError) {
+        reply.status(401).send('Not Authorized: please log in.');
+    } else {
+        next();
+    }
+};
 
 // Register routes
 for (const route of routes) {
+    if (route.requireAuthenticated) {
+        delete route.requireAuthenticated;
+        if (route.preHandler) {
+            route.preHandler = [checkAuthenticated, route.preHandler];
+        } else {
+            route.preHandler = checkAuthenticated;
+        }
+    }
+
     app.route(route);
 }
 
