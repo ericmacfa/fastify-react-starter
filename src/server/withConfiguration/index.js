@@ -1,5 +1,13 @@
+const { configureDecorators } = require('./decorators');
+const { configureHooks } = require('./hooks');
+const { configurePlugins } = require('./plugins');
 const { configureServeWebapp } = require('./serveWebapp');
+const { configureSso } = require('./sso');
 
 module.exports = {
-    configureServeWebapp
+    configureDecorators,
+    configureHooks,
+    configurePlugins,
+    configureServeWebapp,
+    configureSso
 };
